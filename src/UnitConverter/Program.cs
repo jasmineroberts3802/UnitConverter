@@ -24,3 +24,11 @@ app.MapRazorPages()
    .WithStaticAssets();
 
 app.Run();
+
+
+/// <summary>
+/// This is provided to support the WebApplicationFactory used in testing.
+/// </summary>
+public partial class Program
+{
+}

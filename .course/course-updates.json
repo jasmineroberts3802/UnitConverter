@@ -1,0 +1,25 @@
+{
+  "course": "ASP.NET Core",
+  "project": "Unit Converter",
+  "remote": "upstream",
+  "lessons": [
+    {
+      "number": 1,
+      "name": "Lesson 1",
+      "tag": "lesson-01-update",
+      "marker": ".course/applied/lesson-01"
+    },
+    {
+      "number": 2,
+      "name": "Lesson 2",
+      "tag": "lesson-02-update",
+      "marker": ".course/applied/lesson-02"
+    },
+    {
+      "number": 3,
+      "name": "Lesson 3",
+      "tag": "lesson-03-update",
+      "marker": ".course/applied/lesson-03"
+    }
+  ]
+}
