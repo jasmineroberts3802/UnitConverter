@@ -1,0 +1,33 @@
+# .NET build output
+bin/
+obj/
+
+# JetBrains Rider / IntelliJ
+.idea/
+*.sln.iml
+
+# Visual Studio / VS Code metadata
+.vs/
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+
+# Test results / coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Local configuration / secrets
+appsettings.*.local.json
+.env
+.env.*
+
+# Zip files from git archive
+*.zip
