@@ -179,7 +179,7 @@ Your fork is called `origin`. You will also add the instructor's starter reposit
 You only need to do this once:
 
 ```bash
-git remote add upstream <instructor-repository-address>
+git remote add upstream git@github.com:WVUP/UnitConverter.git
 ```
 
 Verify the configuration:
