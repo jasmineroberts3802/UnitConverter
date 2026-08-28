@@ -11,7 +11,7 @@ public class ApplicationTests
 
         using var client = application.CreateClient();
 
-        var response = await client.GetAsync("/");
+        var response = await client.GetAsync("/", TestContext.Current.CancellationToken);
 
         response.EnsureSuccessStatusCode();
     }
@@ -23,8 +23,8 @@ public class ApplicationTests
 
         using var client = application.CreateClient();
 
-        var response = await client.GetAsync("/");
-        String content = await response.Content.ReadAsStringAsync();
+        var response = await client.GetAsync("/", TestContext.Current.CancellationToken);
+        String content = await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken);
 
         Assert.Contains("Unit Converter", content);
     }
