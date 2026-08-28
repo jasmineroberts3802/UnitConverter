@@ -11,6 +11,7 @@ You will fork this repository into your own GitHub account and use your fork thr
 | Lesson | Status |
 | --- | --- |
 | Starter Project | ![Starter Project Tests](../../actions/workflows/starter-tests.yml/badge.svg) |
+| Lesson 1 — First Razor Page | ![Lesson 1 Tests](../../actions/workflows/lesson-01-tests.yml/badge.svg) |
 
 Each badge shows the current status of the automated tests for that stage of the project. A new lesson's badge may initially be failing; it should become green as you complete that lesson's requirements.
 
