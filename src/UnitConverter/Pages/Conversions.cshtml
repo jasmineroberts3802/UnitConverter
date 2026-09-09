@@ -1,0 +1,23 @@
+﻿@page
+@model UnitConverter.Pages.ConversionsModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <h1>@ViewData["ConversionType"]</h1>
+
+    <p> Input: @Model.Input miles</p>
+
+    <p> Output: @Model.Output kilometers</p>
+</div>
+</body>
+</html>
