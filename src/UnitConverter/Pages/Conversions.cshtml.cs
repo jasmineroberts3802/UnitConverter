@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UnitConverter.Pages;
@@ -9,9 +10,13 @@ public class ConversionsModel : PageModel
 
     public string Output { get; set; } = string.Empty;
 
+    public string ConversionType { get; set; } = string.Empty;
+
     public void OnGet()
     {
-        Input = "3.1415";
+        Input = "[BindProperty(SupportsGet = true)]";
+
+        ConversionType = "[BindProperty(SupportsGet = true)]";
 
         ViewData["ConversionType"] = "Miles to Kilometers";
 
