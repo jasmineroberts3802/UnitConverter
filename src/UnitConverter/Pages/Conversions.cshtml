@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{conversionType}/{input}" <!-- route parameters from page model -->
 @model UnitConverter.Pages.ConversionsModel
 
 @{
@@ -13,11 +13,11 @@
 </head>
 <body>
 <div>
-    <h1>@ViewData["ConversionType"]</h1>
+    <h1>@Model.ConversionType</h1>
 
-    <p> Input: @Model.Input miles</p>
+    <p> Input: @Model.Input</p>
 
-    <p> Output: @Model.Output kilometers</p>
+    <p> Output: @Model.Output</p>
 </div>
 </body>
 </html>
