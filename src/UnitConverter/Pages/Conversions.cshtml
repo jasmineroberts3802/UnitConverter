@@ -1,4 +1,5 @@
-﻿@page "{conversionType}/{input}" <!-- route parameters from page model -->
+﻿@page "/Conversions/{conversionType}/{input}"
+<!-- route parameters from page model -->
 @model UnitConverter.Pages.ConversionsModel
 
 @{
@@ -13,11 +14,24 @@
 </head>
 <body>
 <div>
-    <h1>@Model.ConversionType</h1>
 
-    <p> Input: @Model.Input</p>
+    @if (Model.inputErrorIsThrown)
+    {
+        <p class="text-danger">@ViewData["InputErrorMessage"]</p>
+    }
+    else if (Model.conversionTypeErrorIsThrown)
+    {
+        <p class="text-danger">@ViewData["ConversionTypeErrorMessage"]</p>
+    }
+    else
+    {
+        <h1>@Model.ConversionType</h1>
 
-    <p> Output: @Model.Output</p>
+        <p> Input: @Model.Input</p>
+
+        <p> Output: @Model.Output</p>
+    }
+
 </div>
 </body>
 </html>

@@ -6,15 +6,20 @@ namespace UnitConverter.Pages;
 
 public class ConversionsModel : PageModel
 {
+    [BindProperty(SupportsGet = true)]
     public string Input { get; set; } = string.Empty;
 
     public string Output { get; set; } = string.Empty;
 
     // created ConversionType string
+    [BindProperty(SupportsGet = true)]
     public string ConversionType { get; set; } = string.Empty;
 
+    public bool inputErrorIsThrown = false;
+    public bool conversionTypeErrorIsThrown = false;
+
     // added parameters for input and conversiontype for route binding
-    public void OnGet(string input, string conversionType) // flip parameters
+    public void OnGet(string conversionType, string input) // flip parameters
     {
         double value;
         // route bound input parameter
@@ -32,9 +37,11 @@ public class ConversionsModel : PageModel
         {
             value = Convert.ToDouble(input);
         }
-        catch (Exception /* either InvalidCast, Format, or Argument exception? */ )
+        catch (Exception e)
         {
             // Put the error in ViewData
+            ViewData["InputErrorMessage"] = "Error: Input must be a valid number.";
+            inputErrorIsThrown = true;
 
             // Then
             return;
@@ -45,37 +52,39 @@ public class ConversionsModel : PageModel
             case "milestokilometers":
                 Output = new UnitOf.Length().FromMiles(value).ToKilometers().ToString();
                 break;
-            case "kilometers to miles":
+            case "kilometerstomiles":
                 // convert kilometers to miles
+                Output = new UnitOf.Length().FromKilometers(value).ToMiles().ToString();
                 break;
-            case "fahrenheit to celsius":
+            case "fahrenheittocelsius":
                 // convert fahrenheit to celsius
+                Output = new UnitOf.Temperature().FromFahrenheit(value).ToCelsius().ToString();
                 break;
-            case "celsius to fahrenheit":
+            case "celsiustofahrenheit":
                 // convert celsius to fahrenheit
+                Output = new UnitOf.Temperature().FromCelsius(value).ToFahrenheit().ToString();
                 break;
-            case "pounds to kilograms":
+            case "poundstokilograms":
                 // convert pounds to kilograms
+                Output = new UnitOf.Mass().FromPounds(value).ToKilograms().ToString();
                 break;
-            case "kilograms to pounds":
+            case "kilogramstopounds":
                 // convert kilograms to pounds
+                Output = new UnitOf.Mass().FromKilograms(value).ToPounds().ToString();
                 break;
-            case /* conversion supported by UnitOf */ :
+            case "bitstobytes"/* conversion supported by UnitOf */ :
                 // unitof conversion operation
+                Output = new UnitOf.DataStorage().FromBits(value).ToBytes().ToString();
                 break;
-            case /* reverse conversion supported by UnitOf */:
+            case "bytestobits"/* reverse conversion supported by UnitOf */:
                 // unitof conversion operation
+                Output = new UnitOf.DataStorage().FromBytes(value).ToBits().ToString();
                 break;
             default:
                 // viewdata error message
+                ViewData["ConversionTypeErrorMessage"] = "Error: Conversion type is not supported.";
+                conversionTypeErrorIsThrown = true;
                 break;
         }
-
-        Output.ToString();
-
-        Output = new UnitOf.Length().FromMiles(Convert.ToDouble(Input)).ToKilometers().ToString();
-
-
-
     }
 }
