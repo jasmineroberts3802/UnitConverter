@@ -4,6 +4,31 @@
     ViewData["Title"] = "Home page";
 }
 
+<div class="col-4">
+    <form method="post">
+        <div class="mb-3">
+            <label for="conversionType">Select conversion type</label>
+
+            <select id="conversionType"
+                    name="Conversion.ConversionType"
+                    class="form-select">
+                @foreach (var conversion in ConversionTypes.All)
+                {
+                    <option value="@conversion.Key">@conversion.Value</option>
+                }
+            </select>
+        </div>
+
+        <input id="input"
+               name="Conversion.Input"
+               type="text"
+               class="form-control" />
+
+        <button class="btn btn-primary">Convert</button>
+    </form>
+    <p>@Model.Message</p>
+</div>
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>

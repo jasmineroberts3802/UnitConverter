@@ -1,41 +1,43 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Primitives;
 
 namespace UnitConverter.Pages;
 
 public class ConversionsModel : PageModel
 {
-    [BindProperty(SupportsGet = true)]
     public string Input { get; set; } = string.Empty;
 
     public string Output { get; set; } = string.Empty;
 
     // created ConversionType string
-    [BindProperty(SupportsGet = true)]
     public string ConversionType { get; set; } = string.Empty;
 
     public bool inputErrorIsThrown = false;
     public bool conversionTypeErrorIsThrown = false;
 
+    private ConversionModel conversionModel = new ConversionModel();
+
     // added parameters for input and conversiontype for route binding
-    public void OnGet(string conversionType, string input) // flip parameters
+    public void OnGet() // flip parameters
     {
         double value;
+
         // route bound input parameter
-        Input = input;
+        Input = conversionModel.Input;
 
         // route bound conversiontype parameter
-        ConversionType = conversionType;
+        ConversionType = conversionModel.ConversionType;
 
         // updated view data to display the conversiontype parameter instead of hard coded miles to kilometers
-        ViewData["ConversionType"] = conversionType;
+        ViewData["ConversionType"] = conversionModel.ConversionType;
 
         ViewData["Title"] = "Conversions";
 
         try
         {
-            value = Convert.ToDouble(input);
+            value = Convert.ToDouble(conversionModel.Input);
         }
         catch (Exception e)
         {
@@ -47,38 +49,38 @@ public class ConversionsModel : PageModel
             return;
         }
 
-        switch (conversionType.ToLower())
+        switch (conversionModel.ConversionType)
         {
-            case "milestokilometers":
-                Output = new UnitOf.Length().FromMiles(value).ToKilometers().ToString();
+            case ConversionTypes.MilesToKilometers:
+                conversionModel.Output = new UnitOf.Length().FromMiles(value).ToKilometers().ToString();
                 break;
-            case "kilometerstomiles":
+            case ConversionTypes.KilometersToMiles:
                 // convert kilometers to miles
-                Output = new UnitOf.Length().FromKilometers(value).ToMiles().ToString();
+                conversionModel.Output = new UnitOf.Length().FromKilometers(value).ToMiles().ToString();
                 break;
-            case "fahrenheittocelsius":
+            case ConversionTypes.FahrenheitToCelsius:
                 // convert fahrenheit to celsius
-                Output = new UnitOf.Temperature().FromFahrenheit(value).ToCelsius().ToString();
+                conversionModel.Output = new UnitOf.Temperature().FromFahrenheit(value).ToCelsius().ToString();
                 break;
-            case "celsiustofahrenheit":
+            case ConversionTypes.CelsiusToFahrenheit:
                 // convert celsius to fahrenheit
-                Output = new UnitOf.Temperature().FromCelsius(value).ToFahrenheit().ToString();
+                conversionModel.Output = new UnitOf.Temperature().FromCelsius(value).ToFahrenheit().ToString();
                 break;
-            case "poundstokilograms":
+            case ConversionTypes.PoundsToKilograms:
                 // convert pounds to kilograms
-                Output = new UnitOf.Mass().FromPounds(value).ToKilograms().ToString();
+                conversionModel.Output = new UnitOf.Mass().FromPounds(value).ToKilograms().ToString();
                 break;
-            case "kilogramstopounds":
+            case ConversionTypes.KilogramsToPounds:
                 // convert kilograms to pounds
-                Output = new UnitOf.Mass().FromKilograms(value).ToPounds().ToString();
+                conversionModel.Output = new UnitOf.Mass().FromKilograms(value).ToPounds().ToString();
                 break;
-            case "bitstobytes"/* conversion supported by UnitOf */ :
+            case ConversionTypes.BitsToBytes /* conversion supported by UnitOf */ :
                 // unitof conversion operation
-                Output = new UnitOf.DataStorage().FromBits(value).ToBytes().ToString();
+                conversionModel.Output = new UnitOf.DataStorage().FromBits(value).ToBytes().ToString();
                 break;
-            case "bytestobits"/* reverse conversion supported by UnitOf */:
+            case ConversionTypes.BytesToBits /* reverse conversion supported by UnitOf */:
                 // unitof conversion operation
-                Output = new UnitOf.DataStorage().FromBytes(value).ToBits().ToString();
+                conversionModel.Output = new UnitOf.DataStorage().FromBytes(value).ToBits().ToString();
                 break;
             default:
                 // viewdata error message
