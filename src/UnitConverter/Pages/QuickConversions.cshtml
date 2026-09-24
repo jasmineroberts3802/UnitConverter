@@ -20,16 +20,25 @@
     <div>
         <form method="get">
             <div class="mb-3">
-                <label></label>
+                <label class="form-label" asp-for="">Select conversion type</label>
 
+                <select id="conversionType"
+                        name="Conversion.ConversionType"
+                        class="form-select">
+                    @foreach (var conversion in ConversionTypes.All)
+                    {
+                        <option value="@conversion.Key">@conversion.Value</option>
+                    }
+                </select>
             </div>
 
-        <input id="input"
-               name="Conversion.Input"
-               type="text"
-               class="form-control" />
+            <input id="input"
+                   name="Conversion.Input"
+                   type="text"
+                   class="form-control" />
 
-        <button class="btn btn-primary">Convert</button>
+            <button class="btn btn-primary">Convert</button>
+
         </form>
     </div>
 
