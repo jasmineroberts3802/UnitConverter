@@ -18,24 +18,46 @@
     </div>
 
     <div>
-        <form method="get">
+        <form method="get" asp-page-handler="@ConversionTypes.MilesToKilometers">
             <div class="mb-3">
-                <label class="form-label" asp-for="">Select conversion type</label>
-
-                <select id="conversionType"
-                        name="Conversion.ConversionType"
-                        class="form-select">
-                    @foreach (var conversion in ConversionTypes.All)
-                    {
-                        <option value="@conversion.Key">@conversion.Value</option>
-                    }
-                </select>
+                <label class="form-label" for="ConversionTypes.MilesToKilometers">Miles To Kilometers</label>
+                <input class="form-control" type="text" name="ConversionTypes.MilesToKilometers" />
             </div>
 
-            <input id="input"
-                   name="Conversion.Input"
-                   type="text"
-                   class="form-control" />
+            <div class="mb-3" asp-page-handler="@ConversionTypes.KilometersToMiles">
+                <label class="form-label" for="ConversionTypes.KilometersToMiles">Kilometers To Miles</label>
+                <input class="form-control" type="number" name="ConversionTypes.KilometersToMiles" />
+            </div>
+
+            <div class="mb-3" asp-page-handler="@ConversionTypes.FahrenheitToCelsius">
+                <label class="form-label" for="ConversionTypes.FahrenheitToCelsius">Fahrenheit To Celsius</label>
+                <input class="form-control" type="textarea" name="ConversionTypes.FahrenheitToCelsius" />
+            </div>
+
+            <div class="mb-3" asp-page-handler="@ConversionTypes.CelsiusToFahrenheit">
+                <label class="form-label" for="ConversionTypes.CelsiusToFahrenheit">Celsius To Fahrenheit</label>
+                <input class="form-control" type="range" name="ConversionTypes.CelsiusToFahrenheit" />
+            </div>
+
+            <div class="mb-3" asp-page-handler="@ConversionTypes.PoundsToKilograms">
+                <label class="form-label" for="ConversionTypes.PoundsToKilograms">Pounds To Kilograms</label>
+                <input class="form-control" type="select" name="ConversionTypes.PoundsToKilograms" />
+            </div>
+
+            <div class="mb-3" asp-page-handler="@ConversionTypes.KilogramsToPounds">
+                <label class="form-label" for="ConversionTypes.KilogramsToPounds">Kilograms To Pounds</label>
+                <input class="form-control" type="text" name="ConversionTypes.KilogramsToPounds" />
+            </div>
+
+            <div class="mb-3" asp-page-handler="@ConversionTypes.BitsToBytes">
+                <label class="form-label" for="ConversionTypes.BitsToBytes">Bits To Bytes</label>
+                <input class="form-control" type="text" name="ConversionTypes.BitsToBytes" />
+            </div>
+
+            <div class="mb-3" asp-page-handler="@ConversionTypes.BytesToBits">
+                <label class="form-label" for="ConversionTypes.BytesToBits">Bytes To Bits</label>
+                <input class="form-control" type="text" name="ConversionTypes.BytesToBits" />
+            </div>
 
             <button class="btn btn-primary">Convert</button>
 
