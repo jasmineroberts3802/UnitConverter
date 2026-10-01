@@ -2,9 +2,9 @@
 
 public static class ConversionTypes
 {
-    public const string MilesToKilometers = "MilesToKiolmeters";
+    public const string MilesToKilometers = "MilesToKilometers";
 
-    public const string KilometersToMiles = "KiolmetersToMiles";
+    public const string KilometersToMiles = "KilometersToMiles";
 
     public const string FahrenheitToCelsius = "FahrenheitToCelsius";
 
